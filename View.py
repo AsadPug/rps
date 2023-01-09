@@ -1,6 +1,6 @@
 from abc import ABC
 import tkinter as tk
-from Container import BetterButton,BetterCanvas,BetterEntry,BetterFrame,BetterLabel
+from Container import BetterButton,BetterCanvas,BetterFrame,BetterLabel
 from PIL import ImageTk, Image
 
 class View(ABC):
@@ -8,9 +8,7 @@ class View(ABC):
         self.main_frame = main_frame
 
         self.background_width = 1200
-        self.background_height = 800
-        self.logo_width = 600
-        self.logo_height = 200
+        self.background_height = 1200
 
     def draw(self):
         """Méthode abstraite de lancement de la vue"""
@@ -55,4 +53,16 @@ class View(ABC):
 
 class MenuView(View):
     
-    pass
+    def __init__(self, main_frame: BetterFrame):
+        super().__init__(main_frame)
+    
+        self.main_canvas = BetterCanvas(self.main_frame, 0.5, 0.5,
+                                        width=self.background_width,
+                                        height=self.background_height,
+                                        highlightthickness=0)
+        
+        self.quit_button = self.main_canvas.create_rectangle(200,200,400,400,fill="red")
+
+    def draw(self):
+        """Méthode de lancement de la vue"""
+        super(MenuView, self).draw()
