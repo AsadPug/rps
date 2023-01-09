@@ -8,7 +8,7 @@ class View(ABC):
         self.main_frame = main_frame
 
         self.background_width = 1200
-        self.background_height = 1200
+        self.background_height = 1000
 
     def draw(self):
         """Méthode abstraite de lancement de la vue"""
@@ -61,8 +61,12 @@ class MenuView(View):
                                         height=self.background_height,
                                         highlightthickness=0)
         
-        self.quit_button = self.main_canvas.create_rectangle(200,200,400,400,fill="red")
+        self.quit_button = self.main_canvas.create_rectangle(400,700,800,900,fill="red")
+        self.play_button = self.main_canvas.create_rectangle(400,400,800,600,fill="green")
 
     def draw(self):
         """Méthode de lancement de la vue"""
         super(MenuView, self).draw()
+
+class GameView(View):
+    pass

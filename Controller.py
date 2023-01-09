@@ -1,7 +1,8 @@
 
 from View import (
     View,
-    MenuView
+    MenuView,
+    GameView
 )   
 import tkinter as tk
 from Container import BetterFrame
@@ -42,4 +43,14 @@ class MenuController(Controller):
                                        "<Button-1>",
                                        lambda _: self.quit_game())
 
+        self.view.main_canvas.tag_bind(self.view.play_button,
+                                       "<Button-1>",
+                                       lambda _:
+                                       self.change_controller(GameController))
+
         super().start()
+
+class GameController(Controller):
+    def __init__(self, root:tk.Tk):
+         super().__init__(root)
+         self.view: GameView = GameView(self.main_frame)

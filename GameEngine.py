@@ -9,7 +9,7 @@ class Root(tk.Tk):
         self.title("Rock Paper Scissors")
         self.controller = MenuController(self)
         self.resizable(False,False)
-        self.geometry("1200x1200")
+        self.geometry("1200x1000")
 
 def main()->None:
     root = Root()
