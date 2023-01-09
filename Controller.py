@@ -1,6 +1,11 @@
-from View import View
 
+
+from View import (
+    View,
+    MenuView
+)   
 import tkinter as tk
+from Container import BetterFrame
 
 class Controller():
     def __init__(self, root: tk.Tk):
@@ -8,7 +13,7 @@ class Controller():
         """En quelque sorte, il s'agit de la fenêtre principale du jeu
         qui est aussi responsable de sa boucle principale."""
 
-        self.main_frame = tk.Frame(root, 0, 0)
+        self.main_frame = BetterFrame(root, 0, 0)
         """Frame principale du jeu. Elle contient toutes les autres frames"""
         self.main_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
         self.view: View
@@ -29,4 +34,13 @@ class Controller():
         self.root.controller.start()
 
 class MenuController(Controller):
-    pass
+    def __init__(self, root: tk.Tk):
+        super().__init__(root)
+        self.view = MenuView(self.main_frame)
+
+    def start(self):
+        self.view.main_canvas.tag_bind(self.view.quit_button,
+                                       "<Button-1>",
+                                       lambda _: self.quit_game())
+
+        super().start()
